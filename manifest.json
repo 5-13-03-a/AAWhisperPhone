@@ -14,14 +14,12 @@
     {
       "src": "https://i.postimg.cc/Gh4HPCbh/1779914948843.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     },
     {
       "src": "https://i.postimg.cc/Gh4HPCbh/1779914948843.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     }
   ]
 }
