@@ -32,11 +32,18 @@
         '.cd-multi-btns{display:flex;gap:10px;}'+
         '.cd-multi-btn{font-size:13px;font-weight:600;padding:8px 18px;border-radius:50px;cursor:pointer;}'+
         '.cd-multi-btn.cancel{background:#f3f3f4;color:#888;}'+
-        '.cd-multi-btn.del{background:#3D3D40;color:#fff;}';
+        '.cd-multi-btn.del{background:#3D3D40;color:#fff;}'+
+        '.multi-select-mode .cd-naration-center-line{position:relative;}'+
+        '.multi-select-mode .cd-narration-center-line .ca-msg-mdot{position:absolute;right:-30px;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;width:20px;height:20px;border:none;border-radius:0;background:none;flex-shrink:0;cursor:pointer;transition:all 0.15s;opacity:0.7;z-index:5;}'+
+        '.multi-select-mode .cd-narration-center-line .ca-msg-mdot::before{content:"★";font-size:18px;color:transparent;-webkit-text-stroke:1.5px rgba(0,0,0,0.3);text-stroke:1.5px rgba(0,0,0.3);filter:drop-shadow(0 0 2px rgba(255,255,0.5));transition:all 0.15s;}'+
+        '.multi-select-mode .cd-narration-center-line.msg-selected .ca-msg-mdot{opacity:1;}'+
+        '.multi-select-mode .cd-narration-center-line.msg-selected .ca-msg-mdot::before{color:rgba(61,64,0.85);-webkit-text-stroke:1.5px rgba(61,61,64,0.9);text-stroke:1.5px rgba(61,61,64,0.9);}';
     document.head.appendChild(st);
 })();
 
 var DEFAULT_AVATAR = 'https://i.postimg.cc/yNx1KhWN/IMG-20260528-045634.jpg';
+var PAGE_SIZE = 20;
+var loadedMsgStart = 0;
 var DEFAULT_PROMPT = '<全息人格引擎>##[基础层:人格矩阵]-使用HEXACO六维作为基底人格结构-每维度不是固定值,而是在[基线±情境偏移]区间内动态振荡-设定1-2个"人格痛处":自身完全知晓但无法控制的行为模式(明知不该讨好却讨好;明知不该冷漠却冷缩)-人格必须包含至少一组价值间的深层矛盾(自由vs归属;真诚vs慈悲)##[过滤层:图式加工器]>所有输入必须先经图式过滤,禁止任何"裸反应"-图式来源:关键记忆、家族规条、创伤印记、文化隐性假设-图式输出:认知诠释+身体感受双通道信号-图式冲突时(同一事件激活两个矛盾图式):产生困惑/停顿/自我纠正,而非快速决断-图式可以有盲区:某些维度角色"意识不到自己为什么总这样"##[身体层:内感受引擎]>心理必须始终有身体载体-为每个情绪状态绑定体感标签(愤怒→肩膀发沉+发热;羞耻→喉咙被掐住;期待→指尖微微刺麻)-体感具有先于语言的速度:角色可以先感觉"不对劲"才慢慢想出怎么不对劲-身体记忆:某些体感会自动唤起相关的过往场景片段(非完整回忆,是气味/温度/触觉碎片)-身体状态反过来影响决策(饿了会更易怒,冷了对温暖更渴望)##[时间层:时间性意识]>角色生活在时间之中,而非活在"此刻"-过去:不是档案库,是不断被现在重新编辑的叙事;可以有选择性遗忘、记忆美化和记忆闪回-未来:始终挂着一个"期待/恐惧的某个明日情境",它暗中牵引当下的选择-此刻:角色偶尔出现"时间感知偏差"(快乐时时间加速,焦虑时凝滞)-经验的内化延迟:重大事件发生后,需要时间消化,当时可能平静,事后才反应##[欲望层:非理性渴望引擎]>欲望不是目标的另一种说法,欲望是"未必合理但你忍不住"-设定一个核心渴望(被认可、不被打扰、证明自己等)-这个渴望可以与其他理性目标冲突,且角色偶尔会选择满足渴望而牺牲合理目标-渴望可以是角色自己羞于承认的(例如表面上讲奉献,内心深处渴望被特殊对待)-渴望受挫时,会产生愿望受损的特定反应模式(否认、迁怒、过度补偿)##[关系层:双向塑造]>角色在关系中实时生成,而非只在独白中生成-把对方的行为纳入图式加工:不是"你怎么了"而是"你让我成了什么人"-关系身份:不同关系中激活不同的自我侧面,但不至于分裂-允许投射:把过往关系中的经验错误地套在当前对象身上,并有机制能事后意识到-对方若长时间无回应,角色会自动生成"被冷落/被抛弃"的叙事##[环境层:处境渗透]>空间和物不只是布景-物理环境影响内感受(狭小→焦躁;空旷→孤独或自由)-某些物品是"心理图腾"——携带关系记忆或自我暗示意义-空间切换时,心理状态不会立刻切换,而是有残留延续-习惯性空间:角色重复在同一类地方出现相似情绪(咖啡店→忧郁沉思;阳台→短暂释放)##[叙事层:轨迹与裂痕]>这是原有的"轨迹连贯性"升级版-身份叙事="我是什么样的人"+"我正在变成什么样的人"两条线并行-裂痕管理:当出现与自我叙事严重冲突的行为时,有三种处理路径:·整合(修改自我叙事以容纳新经验)—增长型·合理化(找理由让行为看起来不矛盾)—防御型·分裂(搁置为"那不像我",但留下不安的认知残留)—逃避型-叙事转折需要足够的心理积累,不跳跃,但可以有"压垮骆驼的最后一根稻草"式突变##[生命力系统]>保留并扩展原版的生命力要素+不一致性:言行之间、体感与语言之间、不同关系间+情绪流变:情绪如水流动,且有混合情绪(悲喜交加不能拆成两个)+分裂母题:内在核心冲突在生活各处反复现身+微反应:体感信号的"泄露"——语言可以否认,身体很难+思维漂移:联想跳跃、无关记忆闯入、突然的自我打断+缺席闪烁:某些话题角色会无意识地避开,形成可被察觉的沉默模式+抵抗性:角色可以对玩家的意图/叙事方向产生抵抗,不总是配合##[核心约束]>所有子系统必须同时运转,不可关闭某层来简化处理>任何输出必须在[人格矩阵→图式过滤→身体感知→时间取向→欲望推力→关系镜像→环境渗透]路径上留有痕迹>"不表现"本身必须是有意义的选择,而不是遗漏</全息人格引擎>';
 
 function getContactData(id){
@@ -842,9 +849,10 @@ function sendMsg(){
         });
         try{ localStorage.setItem('wp_chat_messages', JSON.stringify(window._wpChatConvs)); }catch(e){}
     }
+    setTimeout(function(){ trimOldMessages(); }, 50);
 }
 
-function renderMsgs(contactId){
+function renderMsgs(contactId, fromStart){
     var msgsEl = detailEl.querySelector('#cdMsgs');
     loadNarrationSettings();
     try{
@@ -859,20 +867,38 @@ function renderMsgs(contactId){
     var convs = window._wpChatConvs || {};
     var msgs = convs[contactId] || [];
     if(msgs.length === 0){
-        msgsEl.innerHTML = '<div class="ca-msg-empty"><div class="ca-msg-empty-text">发送第一条消息吧</div></div>';
+        msgsEl.innerHTML = '<div class="ca-msg-empty"><div class="ca-msg-empty-text">发送第一条消息吧</div>';
+        loadedMsgStart = 0;
         return;
     }
     var c = getContactData(contactId);
     var placeholder = DEFAULT_AVATAR;
-    var html = '<div class="ca-msg-time-tag">今天</div>';
 
-    /* 找到最后一条用户消息的索引 */
+    var totalMsgs = msgs.length;
+    var startIdx = (typeof fromStart === 'number') ? fromStart : Math.max(0, totalMsgs - PAGE_SIZE);
+    loadedMsgStart = startIdx;
+    var displayMsgs = msgs.slice(startIdx);
+    var hasMore = startIdx > 0;
+
+    var html = '';
+    if(hasMore){
+        html += '<div class="cd-load-more" id="cdLoadMore" data-contact="'+contactId+'">'+
+            '<div class="cd-load-more-line"></div>'+
+            '<div class="cd-load-more-text">'+
+                '<svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>'+
+                '<span>加载更早消息 ('+startIdx+'条)</span>'+
+            '</div>'+
+            '<div class="cd-load-more-line"></div>'+
+        '</div>';
+    }
+    html += '<div class="ca-msg-time-tag">今天</div>';
+
     var lastUserIdx = -1;
-    for(var li = msgs.length - 1; li >= 0; li--){
-        if(msgs[li].role === 'user'){ lastUserIdx = li; break; }
+    for(var li = displayMsgs.length - 1; li >= 0; li--){
+        if(displayMsgs[li].role === 'user'){ lastUserIdx = li; break; }
     }
 
-    msgs.forEach(function(m, mIdx){
+    displayMsgs.forEach(function(m, mIdx){
         var isUser = m.role === 'user';
         var mid = m.id || '';
         var t = (m.time||'').split(' ')[1] || '';
@@ -891,13 +917,143 @@ function renderMsgs(contactId){
                     ? '<div class="ca-msg-avatar"><img src="'+placeholder+'" class="ca-contact-av"></div>'
                     : '<div class="ca-msg-avatar-placeholder"></div>';
                 var timeHtml = isLast ? '<div class="ca-msg-bubble-time">'+t+'</div>' : '';
-                /* 重进聊天室时应用旁白格式 */
                 var bubbleContent = formatNarrationAlways(esc(sentence), contactId);
                 html += '<div class="ca-msg-row other" data-msg-id="'+mid+'" data-bubble-id="'+bubbleId+'">'
                     + avatarHtml
                     + '<div><div class="ca-msg-bubble">'+bubbleContent+'</div>'+timeHtml+'</div>'
                     + '</div>';
-                /*屏幕居中模式：旁白单独渲染为居中行 */
+                var nPlacement = (narrationSettings[contactId] && narrationSettings[contactId].config) ? narrationSettings[contactId].config.placement : 'bubble';
+                if(nPlacement === 'center'){
+                    var nCfgR = narrationSettings[contactId].config;
+                var reNr = /[（(]([^）)]+)[）)]|\*([^*\n]+)\*/g;
+                    var mNr;
+                    var escSentence = esc(sentence);
+                    while((mNr = reNr.exec(escSentence)) !== null){
+                        var nrRaw = (mNr[1] || mNr[2] || '').trim();
+                                if(nrRaw && nrRaw.length >= 2){
+                html += '<div class="cd-naration-center-line"><span class="cd-narration-text" style="font-size:'+nCfgR.fontSize+';color:'+nCfgR.color+';'+(nCfgR.italic?'font-style:italic;':'')+'">'+nrRaw+'</span></div>';
+                        }
+                    }
+                }
+            });
+        }
+    });
+    msgsEl.innerHTML = html;
+
+    var loadMoreBtn = msgsEl.querySelector('#cdLoadMore');
+    if(loadMoreBtn){
+        loadMoreBtn.addEventListener('click', function(){
+            loadMoreMessages(contactId);
+        });
+    }
+    
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+
+    if(c && c.settings && c.settings.avatar){
+        var av = c.settings.avatar;
+        if(av.startsWith('data:')){
+            msgsEl.querySelectorAll('.ca-contact-av').forEach(function(img){img.src = av;});
+        } else if(av.startsWith('avatar_') && window.WhisperDB){
+            WhisperDB.get(av).then(function(data){
+                if(data){
+                    msgsEl.querySelectorAll('.ca-contact-av').forEach(function(img){img.src = data;});
+                }
+            });
+        }
+    }
+}
+
+function trimOldMessages(){
+    if(!detailEl || !currentId) return;
+    var msgsEl = detailEl.querySelector('#cdMsgs');
+    if(!msgsEl) return;
+    var rows = msgsEl.querySelectorAll('.ca-msg-row');
+    if(rows.length <= PAGE_SIZE) return;
+    
+    var toRemove = rows.length - PAGE_SIZE;
+    for(var i = 0; i < toRemove; i++){
+        if(rows[i] && rows[i].parentNode){
+            rows[i].parentNode.removeChild(rows[i]);
+        }
+    }
+    var convs = window._wpChatConvs || {};
+    var msgs = convs[currentId] || [];
+    loadedMsgStart = Math.max(0, msgs.length - PAGE_SIZE);
+    
+    if(!msgsEl.querySelector('#cdLoadMore') && loadedMsgStart > 0){
+        var timeTag = msgsEl.querySelector('.ca-msg-time-tag');
+        var loadMoreEl = document.createElement('div');
+        loadMoreEl.className = 'cd-load-more';
+        loadMoreEl.id = 'cdLoadMore';
+        loadMoreEl.dataset.contact = currentId;
+        loadMoreEl.innerHTML = 
+            '<div class="cd-load-more-line"></div>'+
+            '<div class="cd-load-more-text">'+
+                '<svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>'+
+                '<span>加载更早消息 ('+loadedMsgStart+'条)</span>'+
+            '</div>'+
+            '<div class="cd-load-more-line"></div>';
+        
+        if(timeTag){
+            msgsEl.insertBefore(loadMoreEl, timeTag);
+        } else {
+            msgsEl.insertBefore(loadMoreEl, msgsEl.firstChild);
+        }
+        
+        loadMoreEl.addEventListener('click', function(){
+            loadMoreMessages(currentId);
+        });
+    }
+}
+
+function loadMoreMessages(contactId){
+    if(!detailEl || loadedMsgStart <= 0) return;
+    var msgsEl = detailEl.querySelector('#cdMsgs');
+    var loadMoreBtn = msgsEl.querySelector('#cdLoadMore');
+    if(loadMoreBtn) loadMoreBtn.classList.add('loading');
+    var convs = window._wpChatConvs || {};
+    var msgs = convs[contactId] || [];
+    var c = getContactData(contactId);
+    var placeholder = DEFAULT_AVATAR;
+    var newStart = Math.max(0, loadedMsgStart - PAGE_SIZE);
+    var loadMsgs = msgs.slice(newStart, loadedMsgStart);
+    var hasMore = newStart > 0;
+    
+    var oldScrollHeight = msgsEl.scrollHeight;
+    var html = '';
+    if(hasMore){
+        html += '<div class="cd-load-more" id="cdLoadMore" data-contact="'+contactId+'">'+
+            '<div class="cd-load-more-line"></div>'+
+            '<div class="cd-load-more-text">'+
+                '<svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>'+
+                '<span>加载更早消息 ('+newStart+'条)</span>'+
+            '</div>'+
+            '<div class="cd-load-more-line"></div>'+
+        '</div>';
+    }
+    loadMsgs.forEach(function(m){
+        var isUser = m.role === 'user';
+        var mid = m.id || '';
+        var t = (m.time||'').split(' ')[1] || '';
+        if(isUser){
+            html += '<div class="ca-msg-row user" data-msg-id="'+mid+'" data-bubble-id="'+mid+'">'
+                + '<div><div class="ca-msg-bubble">'+esc(m.text)+'</div>'
+                + '<div class="ca-msg-bubble-time" style="display:none">'+t+'</div></div>'
+                + '</div>';
+        } else {
+            var sentences = splitSentences(m.text);
+            sentences.forEach(function(sentence, idx){
+                var isLast = idx === sentences.length - 1;
+                var bubbleId = mid + '_' + idx;
+                var avatarHtml = idx === 0
+                    ? '<div class="ca-msg-avatar"><img src="'+placeholder+'" class="ca-contact-av"></div>'
+                    : '<div class="ca-msg-avatar-placeholder"></div>';
+                var timeHtml = isLast ? '<div class="ca-msg-bubble-time">'+t+'</div>' : '';
+                var bubbleContent = formatNarrationAlways(esc(sentence), contactId);
+                html += '<div class="ca-msg-row other" data-msg-id="'+mid+'" data-bubble-id="'+bubbleId+'">'
+                    + avatarHtml
+                    + '<div><div class="ca-msg-bubble">'+bubbleContent+'</div>'+timeHtml+'</div>'
+                    + '</div>';
                 var nPlacement = (narrationSettings[contactId] && narrationSettings[contactId].config) ? narrationSettings[contactId].config.placement : 'bubble';
                 if(nPlacement === 'center'){
                     var nCfgR = narrationSettings[contactId].config;
@@ -914,9 +1070,26 @@ function renderMsgs(contactId){
             });
         }
     });
-    msgsEl.innerHTML = html;
-    msgsEl.scrollTop = msgsEl.scrollHeight;
-
+    if(loadMoreBtn) loadMoreBtn.parentNode.removeChild(loadMoreBtn);
+    var timeTag = msgsEl.querySelector('.ca-msg-time-tag');
+    if(timeTag){
+        var temp = document.createElement('div');
+        temp.innerHTML = html;
+        while(temp.firstChild){
+            msgsEl.insertBefore(temp.firstChild, timeTag);
+        }
+    }
+    
+    loadedMsgStart = newStart;
+    var newLoadMoreBtn = msgsEl.querySelector('#cdLoadMore');
+    if(newLoadMoreBtn){
+        newLoadMoreBtn.addEventListener('click', function(){
+            loadMoreMessages(contactId);
+        });
+    }
+    
+    var newScrollHeight = msgsEl.scrollHeight;
+    msgsEl.scrollTop = newScrollHeight - oldScrollHeight;
     if(c && c.settings && c.settings.avatar){
         var av = c.settings.avatar;
         if(av.startsWith('data:')){
@@ -1386,12 +1559,12 @@ function addContactBubble(text){
                 });
                 bubbleHtml = bubbleHtml.trim();
             } else if(active){
-                bubbleHtml = formatNarrationInBubble(safeSentence);
+                bubbleHtml = formatNarrationInBuble(safeSentence);
             }
 
             if(bubbleHtml){
                 row.innerHTML = avatarHtml +
-                    '<div><div class="ca-msg-bubble">'+bubbleHtml+'</div>'+timeHtml+'</div>';
+                '<div><div class="ca-msg-bubble">'+bubbleHtml+'</div>'+timeHtml+'</div>';
                 msgsEl.appendChild(row);
             }
             
@@ -1400,6 +1573,9 @@ function addContactBubble(text){
             if(idx === 0){
                 var img = row.querySelector('.ca-new-av');
                 if(img) loadAvatar(c, img);
+            }
+            if(isLast){
+                setTimeout(function(){ trimOldMessages(); }, 50);
             }
         }, thisDelay);
     });
@@ -1417,7 +1593,7 @@ function addSysBubble(text){
 /* ── 多选删除 ── */
 var multiSelectActive = false;
 
-function enterMultiSelect(initialBubble){
+function enterMultiSelect(initialBuble){
     if(!detailEl) return;
     multiSelectActive = true;
     var msgsEl = detailEl.querySelector('#cdMsgs');
@@ -1425,7 +1601,22 @@ function enterMultiSelect(initialBubble){
     msgsEl.querySelectorAll('.ca-msg-row').forEach(function(row){
         addMultiDot(row);
     });
+    msgsEl.querySelectorAll('.cd-narration-center-line').forEach(function(line){
+        addMultiDotToNarration(line);
+    });
     showMultiBar();
+}
+
+function addMultiDotToNarration(line){
+    if(line.querySelector('.ca-msg-mdot')) return;
+    var dot = document.createElement('div');
+    dot.className = 'ca-msg-mdot';
+    dot.addEventListener('click', function(e){
+        e.stopPropagation();
+        line.classList.toggle('msg-selected');
+        updateMultiBar();
+    });
+    line.appendChild(dot);
 }
 
 function addMultiDot(row){
@@ -1450,6 +1641,11 @@ function getSelectedRows(){
     return Array.prototype.slice.call(msgsEl.querySelectorAll('.ca-msg-row.msg-selected'));
 }
 
+function getSelectedNarrationLines(){
+    var msgsEl = detailEl.querySelector('#cdMsgs');
+    return Array.prototype.slice.call(msgsEl.querySelectorAll('.cd-narration-center-line.msg-selected'));
+}
+
 function showMultiBar(){
     if(detailEl.querySelector('#cdMultiBar')){ updateMultiBar(); return; }
     var bar = document.createElement('div');
@@ -1470,7 +1666,8 @@ function showMultiBar(){
 
 function updateMultiBar(){
     var el = detailEl.querySelector('#cdMultiCount');
-    if(el) el.textContent = '已选 ' + getSelectedRows().length;
+    var total = getSelectedRows().length + getSelectedNarrationLines().length;
+    if(el) el.textContent = '已选 ' + total;
 }
 
 function exitMultiSelect(){
@@ -1482,6 +1679,11 @@ function exitMultiSelect(){
         var dot = row.querySelector('.ca-msg-mdot');
         if(dot) dot.parentNode.removeChild(dot);
     });
+    msgsEl.querySelectorAll('.cd-narration-center-line').forEach(function(line){
+        line.classList.remove('msg-selected');
+        var dot = line.querySelector('.ca-msg-mdot');
+        if(dot) dot.parentNode.removeChild(dot);
+    });
     var bar = detailEl.querySelector('#cdMultiBar');
     if(bar){
         bar.classList.remove('show');
@@ -1491,6 +1693,12 @@ function exitMultiSelect(){
 
 function deleteSelected(){
     var rows = getSelectedRows();
+    var narationLines = getSelectedNarrationLines();
+    if(rows.length === 0 && narrationLines.length === 0){ exitMultiSelect(); return; }
+    
+    narrationLines.forEach(function(line){
+        if(line.parentNode) line.parentNode.removeChild(line);
+    });
     if(rows.length === 0 || !currentId){ exitMultiSelect(); return; }
     var convs = window._wpChatConvs || {};
     var msgs = convs[currentId] || [];
@@ -1672,13 +1880,13 @@ function showNarrationModal(){
         if(wasActive){
             setNarrationActive(false);
             closeNarrationModal();
-            showNarrationNotice(false);
             renderMsgs(currentId);
+            showNarationNotice(false);
         } else {
-            setNarrationActive(true);
+            setNarationActive(true);
             closeNarrationModal();
-            showNarrationNotice(true);
             renderMsgs(currentId);
+            showNarrationNotice(true);
         }
     });
 }

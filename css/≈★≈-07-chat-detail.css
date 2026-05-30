@@ -790,3 +790,43 @@
   stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;
 }
 .cd-saved-toast span{font-size:12px;font-weight:600;color:#555;}
+/* ── 分页加载更多 ── */
+.cd-load-more{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 0;margin:6px 0 10px;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.cd-load-more:active{opacity:0.5;transform:scale(0.98);}
+.cd-load-more-line{
+  flex:1;height:0.5px;
+  background:linear-gradient(to right,transparent,rgba(0,0,0,0.06),transparent);
+}
+.cd-load-more-text{
+  display:flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:600;color:#c0c0c0;
+  white-space:nowrap;letter-spacing:0.3px;
+  padding:6px 14px;
+  background:rgba(0,0,0,0.02);
+  border-radius:50px;
+  border:0.5px solid rgba(0,0,0,0.04);
+  transition:all 0.2s;
+}
+.cd-load-more:hover .cd-load-more-text{
+  background:rgba(0,0,0,0.04);
+}
+.cd-load-more-text svg{
+  width:12px;height:12px;
+  stroke:#c0c0c0;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+.cd-load-more.loading .cd-load-more-text{
+  opacity:0.5;pointer-events:none;
+}
+.cd-load-more.loading .cd-load-more-text svg{
+  animation:cd-loadSpin 1s linear infinite;
+}
+@keyframes cd-loadSpin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
