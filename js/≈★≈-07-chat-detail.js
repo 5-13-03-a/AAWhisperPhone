@@ -37,7 +37,12 @@
         '.multi-select-mode .cd-narration-center-line .ca-msg-mdot{position:absolute;right:-30px;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;width:20px;height:20px;border:none;border-radius:0;background:none;flex-shrink:0;cursor:pointer;transition:all 0.15s;opacity:0.7;z-index:5;}'+
         '.multi-select-mode .cd-narration-center-line .ca-msg-mdot::before{content:"★";font-size:18px;color:transparent;-webkit-text-stroke:1.5px rgba(0,0,0,0.3);text-stroke:1.5px rgba(0,0,0,0.3);filter:drop-shadow(0 0 2px rgba(255,255,255,0.5));transition:all 0.15s;}'+
         '.multi-select-mode .cd-narration-center-line.msg-selected .ca-msg-mdot{opacity:1;}'+
-        '.multi-select-mode .cd-narration-center-line.msg-selected .ca-msg-mdot::before{color:rgba(61,61,64,0.85);-webkit-text-stroke:1.5px rgba(61,61,64,0.9);text-stroke:1.5px rgba(61,61,64,0.9);}';
+        '.multi-select-mode .cd-narration-center-line.msg-selected .ca-msg-mdot::before{color:rgba(61,61,64,0.85);-webkit-text-stroke:1.5px rgba(61,61,64,0.9);text-stroke:1.5px rgba(61,61,64,0.9);}'+
+        '.multi-select-mode .ca-msg-time-gap{position:relative;}'+
+        '.multi-select-mode .ca-msg-time-gap .ca-msg-mdot{position:absolute;right:-30px;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;width:20px;height:20px;border:none;border-radius:0;background:none;flex-shrink:0;cursor:pointer;transition:all 0.15s;opacity:0.7;z-index:5;}'+
+        '.multi-select-mode .ca-msg-time-gap .ca-msg-mdot::before{content:"★";font-size:18px;color:transparent;-webkit-text-stroke:1.5px rgba(0,0,0,0.3);text-stroke:1.5px rgba(0,0,0,0.3);filter:drop-shadow(0 0 2px rgba(255,255,255,0.5));transition:all 0.15s;}'+
+        '.multi-select-mode .ca-msg-time-gap.msg-selected .ca-msg-mdot{opacity:1;}'+
+        '.multi-select-mode .ca-msg-time-gap.msg-selected .ca-msg-mdot::before{color:rgba(61,61,64,0.85);-webkit-text-stroke:1.5px rgba(61,61,64,0.9);text-stroke:1.5px rgba(61,61,64,0.9);}';
     document.head.appendChild(st);
 })();
 
@@ -861,25 +866,11 @@ function insertTimeGap(msgsEl){
     );
     var gap = Date.now() - lastDate.getTime();
     var label = getTimeGapLabel(gap);
-    if(!label) {
-        var oldTag = msgsEl.querySelector('.ca-msg-time-gap');
-        if(oldTag) oldTag.parentNode.removeChild(oldTag);
-        return;
-    }
-    var tag = msgsEl.querySelector('.ca-msg-time-gap');
-    if(tag){
-        tag.textContent = label;
-    } else {
-        tag = document.createElement('div');
-        tag.className = 'ca-msg-time-gap';
-        tag.textContent = label;
-        var timeTag = msgsEl.querySelector('.ca-msg-time-tag');
-        if(timeTag){
-            msgsEl.insertBefore(tag, timeTag);
-        } else {
-            msgsEl.insertBefore(tag, msgsEl.firstChild);
-        }
-    }
+    if(!label) return;
+    var tag = document.createElement('div');
+    tag.className = 'ca-msg-time-gap';
+    tag.textContent = label;
+    msgsEl.appendChild(tag);
 }
 
 function sendMsg(){
@@ -1791,6 +1782,9 @@ function enterMultiSelect(initialBuble){
     msgsEl.querySelectorAll('.cd-narration-center-line').forEach(function(line){
         addMultiDotToNarration(line);
     });
+    msgsEl.querySelectorAll('.ca-msg-time-gap').forEach(function(gap){
+        addMultiDotToGap(gap);
+    });
     showMultiBar();
 }
 
@@ -1804,6 +1798,23 @@ function addMultiDotToNarration(line){
         updateMultiBar();
     });
     line.appendChild(dot);
+}
+
+function addMultiDotToGap(gap){
+    if(gap.querySelector('.ca-msg-mdot')) return;
+    var dot = document.createElement('div');
+    dot.className = 'ca-msg-mdot';
+    dot.addEventListener('click', function(e){
+        e.stopPropagation();
+        gap.classList.toggle('msg-selected');
+        updateMultiBar();
+    });
+    gap.appendChild(dot);
+}
+
+function getSelectedTimeGaps(){
+    var msgsEl = detailEl.querySelector('#cdMsgs');
+    return Array.prototype.slice.call(msgsEl.querySelectorAll('.ca-msg-time-gap.msg-selected'));
 }
 
 function addMultiDot(row){
@@ -1853,7 +1864,7 @@ function showMultiBar(){
 
 function updateMultiBar(){
     var el = detailEl.querySelector('#cdMultiCount');
-    var total = getSelectedRows().length + getSelectedNarrationLines().length;
+    var total = getSelectedRows().length + getSelectedNarrationLines().length + getSelectedTimeGaps().length;
     if(el) el.textContent = '已选 ' + total;
 }
 
@@ -1871,6 +1882,11 @@ function exitMultiSelect(){
         var dot = line.querySelector('.ca-msg-mdot');
         if(dot) dot.parentNode.removeChild(dot);
     });
+    msgsEl.querySelectorAll('.ca-msg-time-gap').forEach(function(gap){
+        gap.classList.remove('msg-selected');
+        var dot = gap.querySelector('.ca-msg-mdot');
+        if(dot) dot.parentNode.removeChild(dot);
+    });
     var bar = detailEl.querySelector('#cdMultiBar');
     if(bar){
         bar.classList.remove('show');
@@ -1881,10 +1897,14 @@ function exitMultiSelect(){
 function deleteSelected(){
     var rows = getSelectedRows();
     var narrationLines = getSelectedNarrationLines();
-    if(rows.length === 0 && narrationLines.length === 0){ exitMultiSelect(); return; }
+    var timeGaps = getSelectedTimeGaps();
+    if(rows.length === 0 && narrationLines.length === 0 && timeGaps.length === 0){ exitMultiSelect(); return; }
     
     narrationLines.forEach(function(line){
         if(line.parentNode) line.parentNode.removeChild(line);
+    });
+    timeGaps.forEach(function(gap){
+        if(gap.parentNode) gap.parentNode.removeChild(gap);
     });
     if(rows.length === 0 || !currentId){ exitMultiSelect(); return; }
     var convs = window._wpChatConvs || {};
