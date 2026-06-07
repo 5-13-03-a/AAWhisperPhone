@@ -1,114 +1,440 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="wp-sysfont">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>WhisperPhone · Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⋆｡°✩ 𝓑𝔂𝓮𝓸𝓵 𝓟𝓱𝓸𝓷𝓮 ⋆｡°✩</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#FFFFFF">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="https://i.postimg.cc/Gh4HPCbh/1779914948843.png">
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/Gh4HPCbh/1779914948843.png">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/fbgS5mrg/1780551867047.png">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/fbgS5mrg/1780551867047.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <link rel="stylesheet" href="css/≈★≈-00-variables.css">
-    <link rel="stylesheet" href="css/≈★≈-01-frame.css">
-    <link rel="stylesheet" href="css/≈★≈-02-home.css">
-    <link rel="stylesheet" href="css/≈★≈-03-Settings.css">
-    <link rel="stylesheet" href="css/≈★≈-04-backup.css">
-    <link rel="stylesheet" href="css/≈★≈-05-api.css">
-    <link rel="stylesheet" href="css/≈★≈-06-chat.css">
-    <link rel="stylesheet" href="css/≈★≈-07-chat-detail.css">
-    <link rel="stylesheet" href="css/≈★≈-08-chat-settings.css">
-    <link rel="stylesheet" href="css/≈★≈-10-widget-studio.css">
-    <style>
-    /* 全局系统字体 */
-    html.wp-sysfont,
-    html.wp-sysfont body,
-    html.wp-sysfont *:not([class*="fa-"]):not(.fa):not(.fas):not(.far):not(.fab):not(i){
-        font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif !important;
-    }
-    /* 系统字体预设管理 */
-    .soul-font-fold{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.16,1,0.3,1);}
-    .soul-font-fold.open{max-height:600px;}
-    .sf-add{padding:10px 14px 4px;display:flex;flex-direction:column;gap:8px;}
-    .sf-input{width:100%;height:34px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);background:#fff;padding:0 12px;font-size:12px;color:#333;outline:none;box-sizing:border-box;}
-    .sf-url-row{display:flex;gap:8px;}
-    .sf-url-row .sf-input{flex:1;}
-    .sf-btn{height:34px;border:none;border-radius:10px;background:#3D3D40;color:#fff;font-size:12px;font-weight:600;padding:0 16px;cursor:pointer;}
-    .sf-btn.full{width:100%;}
-    .sf-presets{padding:6px 14px 12px;display:flex;flex-direction:column;gap:6px;}
-    .sf-empty{font-size:11px;color:#bbb;text-align:center;padding:10px 0;}
-    .sf-preset{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(0,0,0,0.025);}
-    .sf-preset-info{flex:1;min-width:0;}
-    .sf-preset-name{font-size:12px;font-weight:600;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .sf-preset-type{font-size:9px;color:#bbb;margin-top:1px;}
-    .sf-use{font-size:11px;font-weight:600;color:#666;background:#eee;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;}
-    .sf-use.active{background:#3D3D40;color:#fff;}
-    .sf-del{font-size:11px;font-weight:600;color:#c9a0a0;background:#f5f0f0;border-radius:8px;padding:5px 10px;cursor:pointer;flex-shrink:0;}
-    /* 字号滑块 */
-    .soul-fs-row{display:flex;align-items:center;gap:12px;padding:14px 16px 16px;}
-    .soul-fs-mini{font-size:11px;color:#bbb;flex-shrink:0;font-weight:700;}
-    .soul-fs-max{font-size:17px;color:#bbb;flex-shrink:0;font-weight:700;}
-    .soul-fs-slider{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:rgba(0,0,0,0.1);outline:none;}
-    .soul-fs-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:#3D3D40;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
-    .soul-fs-slider::-moz-range-thumb{width:14px;height:14px;border:none;border-radius:50%;background:#3D3D40;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
-    .soul-fs-val{font-size:11px;color:#999;font-weight:600;flex-shrink:0;width:38px;text-align:right;}
-    </style>
+    <link rel="stylesheet" href="css/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-00-variables.css">
+    <link rel="stylesheet" href="css/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-01-frame.css">
+    <link rel="stylesheet" href="css/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-home-screen.css">
+    <link rel="stylesheet" href="css/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-02-settings.css">
 </head>
 <body>
 
-    <div class="app-container">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="halftone" width="3.4" height="3.4" patternUnits="userSpaceOnUse">
+      <circle cx="1.7" cy="1.7" r="1.05" fill="#bcbcbc"/>
+    </pattern>
+  </defs>
+</svg>
 
-        <div class="edit-hint">长按拖动 · 点击空白处完成</div>
+<div class="phone-frame" id="phoneFrame">
+  <div class="phone-screen">
+    <div class="wallpaper"></div>
 
-        <div class="page-wrapper" id="slider">
-            <div class="page" data-page="0">
-                <div class="grid-area" id="grid-0"></div>
-            </div>
-            <div class="page" data-page="1">
-                <div class="grid-area" id="grid-1"></div>
-            </div>
-        </div>
-
-        <div class="page-dots">
-            <div class="dot active"></div>
-            <div class="dot"></div></div>
-
-        <div class="dock">
-            <div class="app-icon icon-white"><i class="fa-solid fa-heart-pulse"></i></div>
-            <div class="app-icon icon-gray"><i class="fa-solid fa-compass"></i></div>
-            <div class="app-icon icon-black"><i class="fa-solid fa-paper-plane"></i></div>
-            <div class="app-icon icon-white"><i class="fa-solid fa-bell"></i></div>
-        </div>
-
+    <div class="lace-decor">
+      <svg class="bow b1" viewBox="0 0 100 60"><path d="M50 30 L12 12 Q6 9 6 16 L6 44 Q6 51 12 48 L50 30 L88 12 Q94 9 94 16 L94 44 Q94 51 88 48 Z"/><circle cx="50" cy="30" r="7"/></svg>
+      <svg class="bow b2" viewBox="0 0 100 60"><path d="M50 30 L12 12 Q6 9 6 16 L6 44 Q6 51 12 48 L50 30 L88 12 Q94 9 94 16 L94 44 Q94 51 88 48 Z"/><circle cx="50" cy="30" r="7"/></svg>
+      <svg class="bow b3" viewBox="0 0 100 60"><path d="M50 30 L12 12 Q6 9 6 16 L6 44 Q6 51 12 48 L50 30 L88 12 Q94 9 94 16 L94 44 Q94 51 88 48 Z"/><circle cx="50" cy="30" r="7"/></svg>
+      <svg class="star s1" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s2" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s3" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s4" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s5" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s6" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s7" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s8" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s9" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s10" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s11" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s12" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s13" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
+      <svg class="star s14" viewBox="0 0 24 24"><path d="M12 1.5l3.1 6.6 7.2.9-5.3 4.9 1.4 7.1L12 18.4 5.6 21.9l1.4-7.1L1.7 9.9l7.2-.9z"/></svg>
     </div>
 
-    <script src="js/≈★≈-00-utils.js"></script>
-    <script src="js/≈★≈-02-db.js"></script>
-    <script src="js/≈★≈-01-home.js"></script>
-    <script src="js/≈★≈-03-Settings.js"></script>
-    <script src="js/≈★≈-04-backup.js"></script>
-    <script src="js/≈★≈-05-api.js"></script>
-    <script src="js/≈★≈-06-chat.js"></script>
-    <script src="js/≈★≈-07-chat-detail.js"></script>
-    <script src="js/≈★≈-08-chat-settings.js"></script>
-    <script src="js/≈★≈-09-worldbook.js"></script>
-    <script src="js/≈★≈-10-widget-studio.js"></script>
+    <div class="dynamic-island"></div>
 
-    <script>
-        if('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('./sw.js').then(function() {
-                    console.log('[SW] registered');
-                }).catch(function(err) {
-                    console.log('[SW] register failed:', err);
-                });
-            });
-        }
-    </script>
+    <div class="status-bar">
+      <span class="status-time" id="statusTime">17:27</span>
+      <div class="status-icons">
+        <svg viewBox="0 0 20 14" width="18" height="13">
+          <rect x="0" y="10" width="3" height="4" rx="0.8"/><rect x="4.5" y="7" width="3" height="7" rx="0.8"/>
+          <rect x="9" y="4" width="3" height="10" rx="0.8"/><rect x="13.5" y="0" width="3" height="14" rx="0.8"/>
+        </svg>
+        <svg viewBox="0 0 16 12" width="16" height="12">
+          <path d="M8 9.5a1.4 1.4 0 110 2.8 1.4 1.4 0 010-2.8zM4.2 7.1a5.5 5.5 0 017.6 0 .7.7 0 11-1 1 4.1 4.1 0 00-5.6 0 .7.7 0 11-1-1zM1.6 4.3a9.2 9.2 0 0112.8 0 .7.7 0 11-1 1 7.8 7.8 0 00-10.8 0 .7.7 0 11-1-1z"/>
+        </svg>
+        <div class="battery-container">
+          <svg viewBox="0 0 28 14" width="26" height="13">
+            <rect x="0" y="0" width="24" height="13" rx="3" stroke="rgba(28,28,28,0.45)" stroke-width="1.2" fill="none"/>
+            <rect x="25" y="3.5" width="3" height="6" rx="1" fill="rgba(28,28,28,0.45)"/>
+            <rect x="2" y="2" width="18" height="9" rx="1.5" fill="#2c2c2c"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-widget">
+      <div class="profile-cover" id="profileCover"></div>
+      <div class="profile-info-bg" id="profileInfoBg"></div>
+      <div class="profile-avatar-container">
+        <div class="profile-avatar" id="profileAvatar"></div>
+      </div>
+      <div class="profile-info">
+        <div class="profile-cross" contenteditable="true" data-edit-key="profile_cross">†</div>
+        <div class="profile-handle" contenteditable="true" data-edit-key="profile_handle">@ ˚. 𓂂 挟み猫ドーナツ ˚. 𓂂</div>
+        <div class="profile-bio" contenteditable="true" data-edit-key="profile_bio">.* 東京の雪とあなたの涙 私はもう気にしたくない +</div>
+        <div class="profile-loc">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <span contenteditable="true" data-edit-key="profile_loc">東京の桜の季節 𓂂 ˚</span>
+        </div>
+      </div>
+      <div class="edit-overlay">
+        <button class="edit-reset-icon" type="button" aria-label="恢复默认">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 4V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+            <circle cx="19.5" cy="4.5" r="1" opacity="0.55"/>
+            <circle cx="4.5" cy="19.5" r="0.8" opacity="0.4"/>
+          </svg>
+          <span>恢复默认</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="widget-area">
+      <div class="widget-left-stack">
+        <div class="widget-text-card left">
+          <div class="card-text">
+            <div class="widget-title-small" contenteditable="true" data-edit-key="card1_title">† ˚. 𓂂 Kitten</div>
+            <div class="widget-content-text" contenteditable="true" data-edit-key="card1_content">dependence ˚ ✧</div>
+          </div>
+          <div class="card-avatar" id="cardAvatar1"></div>
+        </div>
+        <div class="widget-text-card right">
+          <div class="card-avatar" id="cardAvatar2"></div>
+          <div class="card-text">
+            <div class="widget-title-small" contenteditable="true" data-edit-key="card2_title">SPELL . ⊹</div>
+            <div class="widget-content-text" contenteditable="true" data-edit-key="card2_content">KITTEN 🐾</div>
+          </div>
+        </div>
+      </div>
+      <div class="widget-right-grid">
+        <div class="widget-slot">
+          <div class="app-item">
+            <div class="app-icon">
+              <svg viewBox="0 0 48 48">
+                <path d="M19 11c-6.6 0-12 4.4-12 9.8 0 3.2 2 6 5.2 7.8l-1.2 3.7 4.2-2.1c1.2.3 2.5.4 3.8.4 6.6 0 12-4.4 12-9.8S25.6 11 19 11z" fill="url(#halftone)"/>
+                <path d="M30 19.5c-5.5 0-10 3.6-10 8 0 2.6 1.6 5 4.3 6.4l-1 3.1 3.5-1.7c1 .2 2.1.3 3.2.3 5.5 0 10-3.6 10-8s-4.5-8.1-10-8.1z" fill="var(--icon-purple)" opacity="0.6" stroke="var(--icon-white)" stroke-width="1.2"/>
+                <ellipse cx="24" cy="7" rx="8" ry="2.5" fill="none" stroke="var(--icon-stroke)" stroke-width="1.5" opacity="0.8"/>
+                <path d="M6 16c-2 2-4 1-5-2s2-5 5-4" fill="none" stroke="var(--icon-stroke)" stroke-width="1.5"/>
+                <path d="M42 16c2 2 4 1 5-2s-2-5-5-4" fill="none" stroke="var(--icon-stroke)" stroke-width="1.5"/>
+                <path d="M15 20l.5.9.9.1-.7.6.2.9-.9-.4-.9.4.2-.9-.7-.6.9-.1z" fill="var(--icon-dark)" opacity="0.6"/>
+                <path d="M33 25l.3.6.7.1-.5.5.1.7-.6-.3-.6.3.1-.7-.5-.5.7-.1z" fill="var(--icon-gray)" opacity="0.4"/>
+              </svg>
+              <span class="dots"></span>
+            </div>
+            <span class="app-label">微信</span>
+          </div>
+        </div>
+        <div class="widget-slot">
+          <div class="app-item">
+            <div class="app-icon">
+              <svg viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="15" fill="url(#halftone)"/>
+                <path d="M15 19h18M24 19v12c0 2.5-1.5 3.5-4 3.5" fill="none" stroke="var(--icon-stroke)" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M18 24h12M20 28h8" fill="none" stroke="var(--icon-stroke)" stroke-width="2" stroke-linecap="round"/>
+                <ellipse cx="24" cy="6" rx="7" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+                <path d="M7 20c-3 0-5-2-4-5s4-2 4 0" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+                <path d="M41 20c3 0 5-2 4-5s-4-2-4 0" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+                <path d="M32 13l.6 1.3 1.4.2-1 1 .25 1.4-1.25-.7-1.25.7.25-1.4-1-1 1.4-.2z" fill="var(--icon-dark)" opacity="0.7"/>
+              </svg>
+              <span class="dots"></span>
+            </div>
+            <span class="app-label">支付宝</span>
+          </div>
+        </div>
+        <div class="widget-slot">
+          <div class="app-item">
+            <div class="app-icon">
+              <svg viewBox="0 0 48 48">
+                <rect x="10" y="15" width="28" height="21" rx="4" fill="url(#halftone)"/>
+                <circle cx="24" cy="25" r="7.5" fill="var(--icon-pink)" opacity="0.6"/>
+                <circle cx="24" cy="25" r="3.6" fill="#ededed" opacity="0.6"/>
+                <ellipse cx="24" cy="8" rx="8" ry="2.5" fill="none" stroke="var(--icon-stroke)" stroke-width="1.5" opacity="0.8"/>
+                <path d="M6 18c-2 2-3 0-4-3s2-4 4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+                <path d="M42 18c2 2 3 0 4-3s-2-4-4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+                <path d="M34 18l.5 1 .9.1-.7.7.2.9-.9-.5-.9.5.2-.9-.7-.7.9-.1z" fill="var(--icon-dark)" opacity="0.6"/>
+              </svg>
+              <span class="dots"></span>
+            </div>
+            <span class="app-label">Archive</span>
+          </div>
+        </div>
+        <div class="widget-slot">
+          <div class="app-item">
+            <div class="app-icon">
+              <svg viewBox="0 0 48 48">
+                <circle cx="24" cy="16" r="6" fill="url(#halftone)"/>
+                <circle cx="32" cy="24" r="6" fill="url(#halftone)"/>
+                <circle cx="24" cy="32" r="6" fill="url(#halftone)"/>
+                <circle cx="16" cy="24" r="6" fill="url(#halftone)"/>
+                <ellipse cx="24" cy="6" rx="7" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+                <path d="M6 24c-2-2-2-4 0-5s4 1 3 3" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+                <path d="M42 24c2-2 2-4 0-5s-4 1-3 3" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+                <path d="M24 20l1.1 2.3 2.5.3-1.8 1.7.4 2.5-2.2-1.2-2.2 1.2.4-2.5-1.8-1.7 2.5-.3z" fill="var(--icon-dark)" opacity="0.6"/>
+              </svg>
+              <span class="dots"></span>
+            </div>
+            <span class="app-label">相册</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pages-wrapper">
+      <!-- 第一页 -->
+      <div class="app-grid" data-page="0">
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+      </div>
+
+      <!-- 第二页 -->
+      <div class="app-grid" data-page="1">
+        <div class="app-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="16" fill="url(#halftone)"/>
+              <circle cx="24" cy="24" r="8" fill="var(--icon-dark)" opacity="0.6"/>
+              <circle cx="24" cy="24" r="4" fill="var(--icon-white)"/>
+              <ellipse cx="24" cy="5" rx="8" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+              <path d="M5 20c-2 0-4-2-3-5s4-1 4 2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M43 20c2 0 4-2 3-5s-4-1-4 2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M24 22.5l.3.6.7.1-.5.5.1.7-.6-.3-.6.3.1-.7-.5-.5.7-.1z" fill="var(--icon-gray)"/>
+            </svg>
+            <span class="dots"></span>
+          </div>
+          <span class="app-label">音乐</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="16" fill="url(#halftone)"/>
+              <path d="M18 14h7c3 0 5 1.5 5 4.5s-2 4.5-5 4.5h-7v8" fill="none" stroke="var(--icon-white)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M23 23l7 9" fill="none" stroke="var(--icon-white)" stroke-width="3" stroke-linecap="round"/>
+              <ellipse cx="24" cy="5" rx="7" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+              <path d="M6 18c-2 2-4 0-4-3s3-3 4 0" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M42 18c2 2 4 0 4-3s-3-3-4 0" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M32 15l.6 1.3 1.4.2-1 1 .25 1.4-1.25-.7-1.25.7.25-1.4-1-1 1.4-.2z" fill="var(--icon-dark)" opacity="0.6"/>
+            </svg>
+            <span class="dots"></span>
+          </div>
+          <span class="app-label">小红书</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 48 48">
+              <rect x="11" y="11" width="26" height="27" rx="3" fill="url(#halftone)"/>
+              <line x1="16" y1="20" x2="32" y2="20" stroke="var(--icon-white)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="16" y1="26" x2="32" y2="26" stroke="var(--icon-white)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="16" y1="32" x2="26" y2="32" stroke="var(--icon-white)" stroke-width="2.5" stroke-linecap="round"/>
+              <ellipse cx="24" cy="6" rx="8" ry="2.5" fill="none" stroke="var(--icon-stroke)" stroke-width="1.5" opacity="0.8"/>
+              <path d="M5 16c-2 2-3 0-4-3s2-4 4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M43 16c2 2 3 0 4-3s-2-4-4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M24 6l1.2 2.5 2.8.3-2.1 1.9.6 2.7-2.5-1.4-2.5 1.4.6-2.7-2.1-1.9 2.8-.3z" fill="var(--icon-dark)" opacity="0.6"/>
+            </svg>
+            <span class="dots"></span>
+          </div>
+          <span class="app-label">备忘录</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="15" fill="url(#halftone)"/>
+              <circle cx="24" cy="24" r="9" fill="var(--icon-white)"/>
+              <ellipse cx="24" cy="5" rx="7" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+              <path d="M6 20c-2 0-4-2-3-5s4-1 4 2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M42 20c2 0 4-2 3-5s-4-1-4 2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M24 20l1.1 2.3 2.5.3-1.8 1.7.4 2.5-2.2-1.2-2.2 1.2.4-2.5-1.8-1.7 2.5-.3z" fill="var(--icon-dark)" opacity="0.6"/>
+            </svg>
+            <span class="dots"></span>
+          </div>
+          <span class="app-label">Settings</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 48 48">
+              <path d="M28 10v20c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c1 0 1.9.2 2.8.7V17c-3 0-5.5-2.5-5.5-5.5V10z" fill="url(#halftone)"/>
+              <ellipse cx="22" cy="6" rx="6" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+              <path d="M6 16c-2 2-3 0-4-3s2-4 4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M42 16c2 2 3 0 4-3s-2-4-4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M28 7.5l.6 1.3 1.4.2-1 1 .25 1.4-1.25-.7-1.25.7.25-1.4-1-1 1.4-.2z" fill="var(--icon-purple)" opacity="0.5"/>
+            </svg>
+            <span class="dots"></span>
+          </div>
+          <span class="app-label">抖音</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="16" fill="url(#halftone)"/>
+              <circle cx="24" cy="24" r="11" fill="none" stroke="var(--icon-white)" stroke-width="2" stroke-dasharray="4 4"/>
+              <circle cx="24" cy="24" r="6" fill="none" stroke="var(--icon-white)" stroke-width="2"/>
+              <ellipse cx="24" cy="5" rx="7" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+              <path d="M6 24c-2-2-2-4 0-5s4 1 3 3" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M42 24c2-2 2-4 0-5s-4 1-3 3" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M24 22l.5 1 .9.1-.7.7.2.9-.9-.5-.9.5.2-.9-.7-.7.9-.1z" fill="var(--icon-dark)" opacity="0.6"/>
+            </svg>
+            <span class="dots"></span>
+          </div>
+          <span class="app-label">小宇宙</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 48 48">
+              <path d="M30 13l1.2 2.5 2.8.3-2.1 1.9.6 2.7-2.5-1.4-2.5 1.4.6-2.7-2.1-1.9 2.8-.3z" fill="var(--icon-yellow)" opacity="0.6"/>
+              <path d="M14 34c-2 0-3.5-1.5-3.5-3.5 0-3.5 2.5-6.5 6-7 1-4.5 5-8 9.5-8 4 0 7.5 2.5 9 6 .5 0 1 0 1.5.2 3 .5 5.5 3.5 5.5 6.8 0 3-2.2 5.5-5 5.5z" fill="url(#halftone)"/>
+              <ellipse cx="22" cy="7" rx="6" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+              <path d="M5 24c-2 0-4-2-3-5s4-1 4 2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M43 24c2 0 4-2 3-5s-4-1-4 2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <line x1="18" y1="37" x2="16.5" y2="41" stroke="var(--icon-gray)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="24" y1="37" x2="22.5" y2="41" stroke="var(--icon-gray)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="30" y1="37" x2="28.5" y2="41" stroke="var(--icon-gray)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="dots"></span>
+          </div>
+          <span class="app-label">天气</span>
+        </div>
+        <div class="app-item">
+          <div class="app-icon">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="16" fill="url(#halftone)"/>
+              <circle cx="24" cy="24" r="13" fill="none" stroke="var(--icon-white)" stroke-width="1.5"/>
+              <ellipse cx="24" cy="5" rx="7" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+              <path d="M6 18c-2 2-4 0-4-3s3-3 4 0" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M42 18c2 2 4 0 4-3s-3-3-4 0" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+              <path d="M24 12l2 8 8 4-8 2-2 10-2-10-8-2 8-4z" fill="var(--icon-dark)" opacity="0.6"/>
+              <circle cx="24" cy="24" r="2" fill="var(--icon-white)"/>
+            </svg>
+            <span class="dots"></span>
+          </div>
+          <span class="app-label">Safari</span>
+        </div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+        <div class="grid-placeholder"></div>
+      </div>
+    </div>
+
+    <div class="page-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="search-btn">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      搜索
+    </div>
+
+    <div class="dock">
+      <div class="dock-inner">
+        <div class="dock-item">
+          <svg viewBox="0 0 48 48">
+            <path d="M14 10.5h6.5l2.5 6.5-3.5 2.5c2.5 5 6.5 9 11.5 11.5l2.5-3.5 6.5 2.5v6.5c0 1.5-1.2 2.5-2.5 2.5C21 41 7 27 7 13c0-1.3 1-2.5 2.5-2.5" fill="url(#halftone)"/>
+            <ellipse cx="24" cy="6" rx="7" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+            <path d="M6 18c-2 2-3 0-4-3s2-4 4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+            <path d="M42 18c2 2 3 0 4-3s-2-4-4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+            <path d="M33 12l.4.8.9.1-.6.6.1.9-.8-.4-.8.4.1-.9-.6-.6.9-.1z" fill="var(--icon-dark)" opacity="0.6"/>
+            <path d="M39 7l.3.6.7.1-.5.5.1.7-.6-.3-.6.3.1-.7-.5-.5.7-.1z" fill="var(--icon-pink)" opacity="0.5"/>
+          </svg>
+          <span class="dots"></span>
+        </div>
+        <div class="dock-item">
+          <svg viewBox="0 0 48 48">
+            <path d="M8 12c0-2.5 2-4.5 4.5-4.5h23c2.5 0 4.5 2 4.5 4.5v18c0 2.5-2 4.5-4.5 4.5H19l-8 7v-7H12.5C10 34.5 8 32.5 8 30z" fill="url(#halftone)"/>
+            <ellipse cx="24" cy="5" rx="7" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+            <path d="M6 20c-2 0-4-2-3-5s4-1 4 2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+            <path d="M42 20c2 0 4-2 3-5s-4-1-4 2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+            <path d="M17 21l.3.6.7.1-.5.5.1.7-.6-.3-.6.3.1-.7-.5-.5.7-.1z" fill="#7d7d7d" opacity="0.6"/>
+            <path d="M24 21l.3.6.7.1-.5.5.1.7-.6-.3-.6.3.1-.7-.5-.5.7-.1z" fill="#7d7d7d" opacity="0.6"/>
+            <path d="M31 21l.3.6.7.1-.5.5.1.7-.6-.3-.6.3.1-.7-.5-.5.7-.1z" fill="#7d7d7d" opacity="0.6"/>
+          </svg>
+          <span class="dots"></span>
+        </div>
+        <div class="dock-item">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="16" r="8" fill="url(#halftone)"/>
+            <path d="M10 38c0-8 7-13 14-13s14 5 14 13v2H10z" fill="url(#halftone)"/>
+            <ellipse cx="24" cy="5" rx="7" ry="2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2" opacity="0.8"/>
+            <path d="M6 18c-2 2-4 0-4-3s3-3 4 0" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+            <path d="M42 18c2 2 4 0 4-3s-3-3-4 0" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+            <path d="M35 11l.5 1 .9.1-.7.7.2.9-.9-.5-.9.5.2-.9-.7-.7.9-.1z" fill="var(--icon-purple)" opacity="0.5"/>
+          </svg>
+          <span class="dots"></span>
+        </div>
+        <div class="dock-item">
+          <svg viewBox="0 0 48 48">
+            <rect x="9" y="10" width="30" height="30" rx="4" fill="url(#halftone)"/>
+            <rect x="9" y="10" width="30" height="9" fill="var(--icon-dark)" opacity="0.4"/>
+            <rect x="15" y="6" width="4" height="8" rx="2" fill="var(--icon-dark)" opacity="0.6"/><rect x="29" y="6" width="4" height="8" rx="2" fill="var(--icon-dark)" opacity="0.6"/>
+            <ellipse cx="24" cy="5" rx="8" ry="2.5" fill="none" stroke="var(--icon-stroke)" stroke-width="1.5" opacity="0.8"/>
+            <path d="M5 16c-2 2-3 0-4-3s2-4 4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+            <path d="M43 16c2 2 3 0 4-3s-2-4-4-2" fill="none" stroke="var(--icon-stroke)" stroke-width="1.2"/>
+            <path d="M24 26l.8 1.7 1.9.2-1.4 1.3.4 1.8-1.7-.9-1.7.9.4-1.8-1.4-1.3 1.9-.2z" fill="var(--icon-dark)" opacity="0.6"/>
+          </svg>
+          <span class="dots"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-indicator"></div>
+  </div>
+</div>
+
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-00-utils.js"></script>
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-02-db.js"></script>
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-home-screen.js"></script>
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-03-settings.js"></script>
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-04-chat-list.js"></script>
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-05-contacts.js"></script>
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-06-chat-settings.js"></script>
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-07-archive.js"></script>
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-08-memory.js"></script>
+<script src="js/｡°✩𝓑𝔂𝓮𝓸𝓵✩°｡-09-worldbook-app.js"></script>
 
 </body>
 </html>

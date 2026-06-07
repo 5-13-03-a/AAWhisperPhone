@@ -1,5 +1,5 @@
 /* ============ WhisperPhone Service Worker ============ */
-const CACHE_NAME = 'whisperphone-cache-v1';
+const CACHE_NAME = '⋆｡°✩ 𝓑𝔂𝓮𝓸𝓵 𝓟𝓱𝓸𝓷𝓮 ⋆｡°✩-cache-v1';
 
 self.addEventListener('install', function(event) {
     self.skipWaiting();
