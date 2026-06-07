@@ -405,21 +405,39 @@ function createContact(){
 /* 聊天详情 */
 function openChatDetail(id){
     try{ contacts = JSON.parse(localStorage.getItem(CONTACTS_KEY)||'[]'); }catch(e){}
-    try{ conversations = JSON.parse(localStorage.getItem(MESSAGES_KEY)||'{}'); }catch(e){}
-    window._wpChatConvs = conversations;
-    window._wpChatSave = function(){
-        localStorage.setItem(MESSAGES_KEY, JSON.stringify(window._wpChatConvs));
-    };
-    window._wpChatRefresh = function(){
-        try{ contacts = JSON.parse(localStorage.getItem(CONTACTS_KEY)||'[]'); }catch(e){}
+    if(window.WhisperDB){
+        window.WhisperDB.get('wp_chat_messages').then(function(data){
+            if(data && typeof data === 'object'){
+                conversations = data;
+            } else {
+                try{ conversations = JSON.parse(localStorage.getItem(MESSAGES_KEY)||'{}'); }catch(e){}
+            }
+            window._wpChatConvs = conversations;
+            finishOpen();
+        }).catch(function(){
+            try{ conversations = JSON.parse(localStorage.getItem(MESSAGES_KEY)||'{}'); }catch(e){}
+            window._wpChatConvs = conversations;
+            finishOpen();
+        });
+    } else {
         try{ conversations = JSON.parse(localStorage.getItem(MESSAGES_KEY)||'{}'); }catch(e){}
         window._wpChatConvs = conversations;
-        renderMsgs();
-        renderOnline();
-        renderContacts();
-    };
-    if(typeof window.openChatDetail === 'function'){
-        window.openChatDetail(id);
+        finishOpen();
+    }
+    function finishOpen(){
+        window._wpChatSave = function(){
+            localStorage.setItem(MESSAGES_KEY, JSON.stringify(window._wpChatConvs));
+        };
+        window._wpChatRefresh = function(){
+            try{ contacts = JSON.parse(localStorage.getItem(CONTACTS_KEY)||'[]'); }catch(e){}
+            conversations = window._wpChatConvs || {};
+            renderMsgs();
+            renderOnline();
+            renderContacts();
+        };
+        if(typeof window.openChatDetail === 'function'){
+            window.openChatDetail(id);
+        }
     }
 }
 
@@ -442,8 +460,12 @@ function openChatApp(){
 
     window._wpChatRefresh = function(){
         try{ contacts = JSON.parse(localStorage.getItem(CONTACTS_KEY)||'[]'); }catch(e){}
-        try{ conversations = JSON.parse(localStorage.getItem(MESSAGES_KEY)||'{}'); }catch(e){}
-        window._wpChatConvs = conversations;
+        if(window._wpChatConvs && Object.keys(window._wpChatConvs).length > 0){
+            conversations = window._wpChatConvs;
+        } else {
+            try{ conversations = JSON.parse(localStorage.getItem(MESSAGES_KEY)||'{}'); }catch(e){ conversations = {}; }
+            window._wpChatConvs = conversations;
+        }
         renderMsgs();
         renderOnline();
         renderContacts();

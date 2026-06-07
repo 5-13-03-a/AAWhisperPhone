@@ -8,21 +8,23 @@ var built = false;
 var currentContactId = null;
 
 function buildHTML(){
-  if(!document.getElementById('cs-tile-border-style')){
-    var st = document.createElement('style');
-    st.id = 'cs-tile-border-style';
-    st.textContent = '.cs-tile{border:0.5px solid rgba(0,0,0,0.1);}';
-    document.head.appendChild(st);
-  }
   return ''+
+  '<div class="cs-deco-layer">'+
+    '<div class="cs-glow-1"></div><div class="cs-glow-2"></div><div class="cs-glow-3"></div>'+
+    '<div class="cs-noise"></div>'+
+    '<div class="cs-line-deco-1"></div><div class="cs-line-deco-2"></div>'+
+    '<div class="cs-ring-deco"></div><div class="cs-ring-deco-2"></div>'+
+    '<div class="cs-cross cs-cross-1"></div><div class="cs-cross cs-cross-2"></div><div class="cs-cross cs-cross-3"></div>'+
+    '<div class="cs-diamond cs-diamond-1"></div><div class="cs-diamond cs-diamond-2"></div>'+
+  '</div>'+
   '<div class="cs-sidebar">'+
     '<div class="cs-side-back" data-action="cs-back"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>'+
     '<div class="cs-side-nav">'+
-      '<div class="cs-side-item active" data-sec="csInfo"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>'+
-      '<div class="cs-side-item" data-sec="csPersona"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>'+
-      '<div class="cs-side-item" data-sec="csChat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>'+
-      '<div class="cs-side-item" data-sec="csLook"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>'+
-      '<div class="cs-side-item" data-sec="csApi"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>'+
+      '<div class="cs-side-item active" data-sec="csInfo"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="cs-tip">资料</div></div>'+
+      '<div class="cs-side-item" data-sec="csPersona"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><div class="cs-tip">人设</div></div>'+
+      '<div class="cs-side-item" data-sec="csChat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><div class="cs-tip">聊天</div></div>'+
+      '<div class="cs-side-item" data-sec="csLook"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg><div class="cs-tip">外观</div></div>'+
+      '<div class="cs-side-item" data-sec="csApi"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg><div class="cs-tip">世界书</div></div>'+
     '</div>'+
   '</div>'+
   '<div class="cs-main">'+
@@ -46,9 +48,9 @@ function buildHTML(){
       '</div>'+
       '<div class="cs-hero-name" id="csHeroName">联系人</div>'+
       '<div class="cs-hero-sub" id="csHeroSub">离线</div>'+
+      '<div class="cs-hero-gradient-line"></div>'+
     '</div>'+
     '<div class="cs-body">'+
-      /* 资料 */
       '<div class="cs-section active" id="csInfo">'+
         '<div class="cs-tile"><div class="cs-tile-label">基本信息</div>'+
           '<div class="cs-field"><div class="cs-field-label">真实名</div><input class="cs-field-input" id="csRealName" placeholder="角色的真实名字"></div>'+
@@ -64,7 +66,6 @@ function buildHTML(){
           '</div>'+
         '</div>'+
       '</div>'+
-      /* 人设 */
       '<div class="cs-section" id="csPersona">'+
         '<div class="cs-tile"><div class="cs-tile-label">角色</div>'+
           '<div class="cs-field"><div class="cs-field-label">名称</div><input class="cs-field-input" id="csCharName" placeholder="角色叫什么..."></div>'+
@@ -72,15 +73,35 @@ function buildHTML(){
           '<div class="cs-field"><div class="cs-field-label">开场白</div><input class="cs-field-input" id="csGreeting" placeholder="第一句话..."></div>'+
         '</div>'+
         '<div class="cs-tile">'+
-          '<div class="cs-item cs-fold-trigger" data-action="cs-fold"><div class="cs-item-dot" style="background:#ccc;"></div><div class="cs-item-label">系统 Prompt</div><svg class="cs-fold-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>'+
+          '<div class="cs-item cs-fold-trigger" data-action="cs-fold"><div class="cs-item-dot" style="background:rgba(180,160,220,0.2);"></div><div class="cs-item-label">系统 Prompt</div><svg class="cs-fold-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>'+
           '<div class="cs-fold" id="csFold"><div style="padding:10px 0 4px;"><textarea class="cs-field-textarea" id="csPrompt" style="min-height:140px;" placeholder="输入系统提示词..."></textarea></div></div>'+
         '</div>'+
+        '<div class="cs-tile cs-mask-card">'+
+          '<div class="cs-mask-header">'+
+            '<div class="cs-mask-header-icon" id="csMaskIcon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6 2 10.5c0 1.5.5 3 1.4 4.2L2 22l5-2.5c1.5.7 3.2 1 5 1 5.52 0 10-4 10-8.5S17.52 2 12 2z"/><circle cx="8.5" cy="10" r="1.2"/><circle cx="15.5" cy="10" r="1.2"/></svg></div>'+
+            '<div class="cs-mask-header-text">'+
+              '<div class="cs-mask-header-title">我的面具</div>'+
+              '<div class="cs-mask-header-sub">让 AI 知道你是谁</div>'+
+            '</div>'+
+          '</div>'+
+          '<div class="cs-mask-active empty" id="csMaskActive">'+
+            '<div class="cs-mask-active-avatar" id="csMaskActiveAvatar"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>'+
+            '<div class="cs-mask-active-info">'+
+              '<div class="cs-mask-active-name" id="csMaskActiveName">未选择面具</div>'+
+              '<div class="cs-mask-active-desc" id="csMaskActiveDesc">AI 将不知道你是谁</div>'+
+            '</div>'+
+            '<div class="cs-mask-active-change" id="csMaskToggle">切换</div>'+
+          '</div>'+
+          '<div class="cs-mask-picker" id="csMaskPicker">'+
+            '<div class="cs-mask-list-inner" id="csMaskList"></div>'+
+            '<div class="cs-mask-add-row"><div class="cs-mask-add-btn" id="csMaskAddBtn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>新建面具</span></div></div>'+
+          '</div>'+
+        '</div>'+
       '</div>'+
-      /* 聊天 */
       '<div class="cs-section" id="csChat">'+
         '<div class="cs-tile"><div class="cs-tile-label">输入栏</div>'+
-          '<div class="cs-item"><div class="cs-item-dot"></div><div class="cs-item-label">悬浮胶囊</div><input type="radio" name="csBar" value="capsule" checked style="accent-color:#999;"></div>'+
-          '<div class="cs-item"><div class="cs-item-dot"></div><div class="cs-item-label">底部白块</div><input type="radio" name="csBar" value="block" style="accent-color:#999;"></div>'+
+          '<div class="cs-item"><div class="cs-item-dot"></div><div class="cs-item-label">悬浮胶囊</div><input type="radio" name="csBar" value="capsule" checked style="accent-color:#b5c8ab;"></div>'+
+          '<div class="cs-item"><div class="cs-item-dot"></div><div class="cs-item-label">底部白块</div><input type="radio" name="csBar" value="block" style="accent-color:#b5c8ab;"></div>'+
         '</div>'+
         '<div class="cs-tile"><div class="cs-tile-label">消息</div>'+
           '<div class="cs-item"><div class="cs-item-dot"></div><div class="cs-item-label">提示音</div><div class="cs-sw on"></div></div>'+
@@ -92,10 +113,9 @@ function buildHTML(){
           '<div class="cs-bp"><div class="cs-bp-row l"><div class="cs-bp-b">你好呀 👋</div></div><div class="cs-bp-row r"><div class="cs-bp-b">嗨～</div></div><div class="cs-bp-row l"><div class="cs-bp-b">出去走走吧</div></div></div>'+
         '</div>'+
       '</div>'+
-      /* 外观 */
       '<div class="cs-section" id="csLook">'+
         '<div class="cs-tile">'+
-          '<div class="cs-item cs-fold-trigger" data-action="cs-fold-wp"><div class="cs-item-dot" style="background:#ccc;"></div><div class="cs-item-label">壁纸</div><svg class="cs-fold-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>'+
+          '<div class="cs-item cs-fold-trigger" data-action="cs-fold-wp"><div class="cs-item-dot" style="background:rgba(180,160,220,0.2);"></div><div class="cs-item-label">壁纸</div><svg class="cs-fold-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>'+
           '<div class="cs-fold" id="csFoldWp">'+
             '<div style="padding:10px 0 4px;">'+
               '<div class="cs-wp-grid">'+
@@ -110,14 +130,13 @@ function buildHTML(){
           '</div>'+
         '</div>'+
         '<div class="cs-tile"><div class="cs-tile-label">字体</div>'+
-          '<div style="display:flex;gap:6px;padding:4px 0;">'+
-            '<div class="cs-fontsize-btn" data-fontsize="small" style="flex:1;padding:8px 0;border-radius:10px;background:#f3f3f4;text-align:center;font-size:10px;font-weight:600;color:#bbb;cursor:pointer;">小</div>'+
-            '<div class="cs-fontsize-btn active" data-fontsize="normal" style="flex:1;padding:8px 0;border-radius:10px;background:#333;text-align:center;font-size:10px;font-weight:600;color:#fff;cursor:pointer;">标准</div>'+
-            '<div class="cs-fontsize-btn" data-fontsize="large" style="flex:1;padding:8px 0;border-radius:10px;background:#f3f3f4;text-align:center;font-size:10px;font-weight:600;color:#bbb;cursor:pointer;">大</div>'+
+          '<div class="cs-fontsize-row">'+
+            '<div class="cs-fontsize-btn" data-fontsize="small">小</div>'+
+            '<div class="cs-fontsize-btn active" data-fontsize="normal">标准</div>'+
+            '<div class="cs-fontsize-btn" data-fontsize="large">大</div>'+
           '</div>'+
         '</div>'+
       '</div>'+
-      /* 世界书 */
       '<div class="cs-section" id="csApi">'+
         '<div class="cs-tile"><div class="cs-tile-label">世界书</div>'+
           '<div class="cs-wb-list" id="csWbList"></div>'+
@@ -127,12 +146,12 @@ function buildHTML(){
           '<div class="cs-tile-label">记忆库</div>'+
           '<div class="cs-item"><div class="cs-item-dot"></div><div class="cs-item-label">自动总结</div><div class="cs-sw" id="csMemAutoSumm"></div></div>'+
           '<div class="cs-item"><div class="cs-item-dot"></div><div class="cs-item-label">滑落条数</div><input class="cs-context-input" id="csMemSlide" type="number" min="5" max="200" placeholder="30"></div>'+
-          '<div class="cs-item cs-mem-manual" id="csMemManualBtn"><div class="cs-item-dot" style="background:#b5c8ab;"></div><div class="cs-item-label">手动总结</div><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#bbb;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="9 18 15 12 9 6"/></svg></div>'+
-          '<div class="cs-item cs-mem-open" id="csMemOpenBtn"><div class="cs-item-dot" style="background:#a0b8c8;"></div><div class="cs-item-label">进入记忆库</div><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#bbb;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="9 18 15 12 9 6"/></svg></div>'+
+          '<div class="cs-item cs-mem-manual" id="csMemManualBtn"><div class="cs-item-dot" style="background:rgba(181,200,171,0.3);"></div><div class="cs-item-label">手动总结</div><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#bbb;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="9 18 15 12 9 6"/></svg></div>'+
+          '<div class="cs-item cs-mem-open" id="csMemOpenBtn"><div class="cs-item-dot" style="background:rgba(160,184,200,0.3);"></div><div class="cs-item-label">进入记忆库</div><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#bbb;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="9 18 15 12 9 6"/></svg></div>'+
         '</div>'+
       '</div>'+
     '</div>'+
-    '<div class="cs-footer">WHISPERPHONE</div>'+
+    '<div class="cs-footer"><div class="cs-footer-line"></div><div class="cs-footer-text">WHISPERPHONE</div><div class="cs-footer-stars">✦ ✦ ✦</div></div>'+
   '</div>';
 }
 
@@ -163,6 +182,10 @@ function bind(){
         settingsEl.querySelector('#csFoldWp').classList.toggle('open');
       }
     }
+    var maskToggle = e.target.closest('#csMaskToggle');
+    if(maskToggle){ settingsEl.querySelector('#csMaskPicker').classList.toggle('open'); return; }
+    var maskMore = e.target.closest('.cs-mask-opt-more');
+    if(maskMore){ var mid=maskMore.dataset.maskId; var masks=getUserMasks(); var mk=masks.find(function(m){return m.id===mid;}); if(mk) showMaskActionSheet(mk); return; }
     var wpCustom = e.target.closest('#csWpCustom');
     if(wpCustom){ uploadWallpaper(); return; }
     var barRadio = e.target.closest('[name="csBar"]');
@@ -192,12 +215,22 @@ function bind(){
     if(fsItem){
       settingsEl.querySelectorAll('[data-fontsize]').forEach(function(f){
         f.classList.remove('active');
-        f.style.background='#f3f3f4';f.style.color='#bbb';
       });
       fsItem.classList.add('active');
-      fsItem.style.background='#333';fsItem.style.color='#fff';
       saveContactSettings();
       liveRefresh();
+    }
+    var maskHero = e.target.closest('#csMaskHero');
+    if(maskHero){
+      var scrollEl = settingsEl.querySelector('#csMaskList');
+      var addEl = settingsEl.querySelector('.cs-mask-add-btn');
+      if(scrollEl){
+        var isOpen = scrollEl.classList.contains('open');
+        scrollEl.classList.toggle('open');
+        if(addEl) addEl.classList.toggle('open');
+        var arrow = maskHero.querySelector('.cs-mask-hero-arrow');
+        if(arrow) arrow.classList.toggle('open', !isOpen);
+      }
     }
   });
 
@@ -400,7 +433,7 @@ function loadContactSettings(contactId){
 
   var cfg = c.settings || {};
   settingsEl.querySelector('#csHeroName').textContent = c.name;
-  settingsEl.querySelector('#csHeroSub').textContent = c.online ? '在线' : '离线';
+  settingsEl.querySelector('#csHeroSub').innerHTML = c.online ? '<span class="dot-on"></span>在线' : '离线';
   settingsEl.querySelector('#csRealName').value = cfg.realName || cfg.charName || c.name || '';
   settingsEl.querySelector('#csContextRounds').value = cfg.contextRounds || '20';
 
@@ -460,12 +493,13 @@ function loadContactSettings(contactId){
   var fs = cfg.fontSize || 'normal';
   settingsEl.querySelectorAll('[data-fontsize]').forEach(function(f){
     f.classList.remove('active');
-    f.style.background='#f3f3f4';f.style.color='#bbb';
+    f.style.background='';f.style.color='';
   });
   var fsEl = settingsEl.querySelector('[data-fontsize="'+fs+'"]');
-  if(fsEl){fsEl.classList.add('active');fsEl.style.background='#333';fsEl.style.color='#fff';}
+  if(fsEl) fsEl.classList.add('active');
 
   renderWbList(contactId, cfg);
+  renderMaskList(contactId, cfg);
 }
 
 function saveContactSettings(){
@@ -507,6 +541,9 @@ function saveContactSettings(){
   var activeFs = settingsEl.querySelector('[data-fontsize].active');
   c.settings.fontSize = activeFs ? activeFs.dataset.fontsize : 'normal';
 
+  var activeMaskOpt = settingsEl.querySelector('.cs-mask-opt.active');
+  c.settings.userMaskId = activeMaskOpt ? (activeMaskOpt.dataset.maskId || '') : (c.settings.userMaskId || '');
+
   /* 保存勾选的世界书（仅当世界书列表已渲染时才覆盖，避免误清空绑定） */
   var wbChecks = settingsEl.querySelectorAll('.cs-wb-check');
   if(wbChecks.length > 0){
@@ -520,6 +557,7 @@ function saveContactSettings(){
   localStorage.setItem('wp_chat_contacts', JSON.stringify(contacts));
 
   settingsEl.querySelector('#csHeroName').textContent = c.name;
+  settingsEl.querySelector('#csHeroSub').innerHTML = c.online ? '<span class="dot-on"></span>在线' : '离线';
 }
 
 function liveRefresh(){
@@ -535,7 +573,7 @@ function updateHeroFromData(){
   var c = contacts.find(function(x){return x.id === currentContactId;});
   if(!c) return;
   settingsEl.querySelector('#csHeroName').textContent = c.name;
-  settingsEl.querySelector('#csHeroSub').textContent = c.online ? '在线' : '离线';
+  settingsEl.querySelector('#csHeroSub').innerHTML = c.online ? '<span class="dot-on"></span>在线' : '离线';
 }
 
 function open(contactId){
@@ -571,9 +609,28 @@ function showSavedToast(){
 
 function close(){
   if(!settingsEl) return;
+  var cid = currentContactId;
   saveContactSettings();
+  /* 先让设置页所有输入框失焦，防止焦点残留拦截键盘事件 */
+  settingsEl.querySelectorAll('input,textarea,select,[contenteditable]').forEach(function(el){
+    el.blur();
+  });
+  if(document.activeElement && settingsEl.contains(document.activeElement)){
+    document.activeElement.blur();
+  }
   settingsEl.classList.remove('active');
+  if(window._wpChatConvs){
+    try{ localStorage.setItem('wp_chat_messages', JSON.stringify(window._wpChatConvs)); }catch(e){}
+  }
   liveRefresh();
+  if(cid && typeof window._wpRestoreChatId === 'function'){
+    window._wpRestoreChatId(cid);
+  }
+  /* 延迟聚焦聊天输入框，确保设置页完全隐藏后焦点回到聊天室 */
+  setTimeout(function(){
+    var cdInput = document.getElementById('cdInput');
+    if(cdInput) cdInput.focus();
+  }, 100);
   showSavedToast();
 }
 
@@ -907,9 +964,271 @@ function bindMemoryEvents(){
   if(manualBtn) manualBtn.addEventListener('click', showManualSummaryModal);
   var openBtn = settingsEl.querySelector('#csMemOpenBtn');
   if(openBtn) openBtn.addEventListener('click', openMemoryLibrary);
+  var maskAddBtn = settingsEl.querySelector('#csMaskAddBtn');
+  if(maskAddBtn) maskAddBtn.addEventListener('click', function(){ showMaskEditModal(null); });
+}
+
+/* ── 用户面具系统 ── */
+function getUserMasks(){
+  try{ return JSON.parse(localStorage.getItem('whisperphone_user_masks')||'[]'); }catch(e){ return []; }
+}
+function saveUserMasks(masks){
+  try{ localStorage.setItem('whisperphone_user_masks', JSON.stringify(masks)); }catch(e){}
+}
+
+function renderMaskList(contactId, cfg){
+  var listEl = settingsEl.querySelector('#csMaskList');
+  var activeEl = settingsEl.querySelector('#csMaskActive');
+  var activeAvEl = settingsEl.querySelector('#csMaskActiveAvatar');
+  var activeNameEl = settingsEl.querySelector('#csMaskActiveName');
+  var activeDescEl = settingsEl.querySelector('#csMaskActiveDesc');
+  var iconEl = settingsEl.querySelector('#csMaskIcon');
+  if(!listEl) return;
+  var masks = getUserMasks();
+  var selectedId = (cfg && cfg.userMaskId) || '';
+  var selected = masks.find(function(m){return m.id === selectedId;});
+
+  if(selected){
+    if(activeEl) activeEl.classList.remove('empty');
+    if(activeAvEl){
+      activeAvEl.innerHTML = escSettings(selected.name.charAt(0));
+      if(selected.avatar && window.WhisperDB){
+        var avKey = selected.avatar;
+        if(avKey.startsWith('data:')){
+          activeAvEl.innerHTML = '<img src="'+avKey+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+        } else if(avKey.startsWith('mask_avatar_')){
+          WhisperDB.get(avKey).then(function(d){
+            if(d) activeAvEl.innerHTML = '<img src="'+d+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+          });
+        }
+      }
+    }
+    if(activeNameEl) activeNameEl.textContent = selected.name;
+    if(activeDescEl) activeDescEl.textContent = (selected.persona||'').substring(0,35)+(selected.persona&&selected.persona.length>35?'…':'');
+    if(iconEl) iconEl.classList.add('has');
+  } else {
+    if(activeEl) activeEl.classList.add('empty');
+    if(activeAvEl) activeAvEl.innerHTML = '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    if(activeNameEl) activeNameEl.textContent = '未选择面具';
+    if(activeDescEl) activeDescEl.textContent = 'AI 将不知道你是谁';
+    if(iconEl) iconEl.classList.remove('has');
+  }
+
+  var html = '';
+  html += '<div class="cs-mask-opt'+(selectedId===''?' active':'')+'" data-mask-id="">'+
+    '<div class="cs-mask-opt-radio"></div>'+
+    '<div class="cs-mask-opt-info"><div class="cs-mask-opt-name" style="color:#bbb;">不使用面具</div><div class="cs-mask-opt-desc">AI 将不知道用户的身份</div></div>'+
+  '</div>';
+  if(masks.length > 0) html += '<div class="cs-mask-sep"></div>';
+  masks.forEach(function(m){
+    var isActive = m.id === selectedId;
+    var avHtml = m.avatar ? '<img class="cs-mask-opt-av-img" data-avkey="'+escSettings(m.avatar)+'" src="" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:none;">'+escSettings(m.name.charAt(0)) : escSettings(m.name.charAt(0));
+    html += '<div class="cs-mask-opt'+(isActive?' active':'')+'" data-mask-id="'+m.id+'">'+
+      '<div class="cs-mask-opt-radio"></div>'+
+      '<div class="cs-mask-opt-avatar">'+avHtml+'</div>'+
+      '<div class="cs-mask-opt-info">'+
+        '<div class="cs-mask-opt-name">'+escSettings(m.name)+'</div>'+
+        '<div class="cs-mask-opt-desc">'+escSettings((m.persona||'').substring(0,40))+(m.persona&&m.persona.length>40?'…':'')+'</div>'+
+      '</div>'+
+      '<div class="cs-mask-opt-more" data-mask-id="'+m.id+'"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></div>'+
+    '</div>';
+  });
+  listEl.innerHTML = html;
+
+  /* 异步加载面具头像 */
+  if(window.WhisperDB){
+    listEl.querySelectorAll('.cs-mask-opt-av-img').forEach(function(img){
+      var key = img.dataset.avkey;
+      if(!key) return;
+      if(key.startsWith('data:')){
+        img.src = key; img.style.display = '';
+        var txt = img.nextSibling; if(txt && txt.nodeType === 3) txt.textContent = '';
+      } else if(key.startsWith('mask_avatar_')){
+        WhisperDB.get(key).then(function(d){
+          if(d){ img.src = d; img.style.display = ''; var txt = img.nextSibling; if(txt && txt.nodeType === 3) txt.textContent = ''; }
+        });
+      }
+    });
+  }
+
+  listEl.querySelectorAll('.cs-mask-opt').forEach(function(opt){
+    opt.addEventListener('click', function(e){
+      if(e.target.closest('.cs-mask-opt-more')) return;
+      listEl.querySelectorAll('.cs-mask-opt').forEach(function(o){o.classList.remove('active');});
+      opt.classList.add('active');
+      var mid = opt.dataset.maskId;
+      var sel = masks.find(function(m){return m.id === mid;});
+      if(sel){
+        if(activeEl) activeEl.classList.remove('empty');
+        if(activeAvEl) activeAvEl.textContent = sel.name.charAt(0);
+        if(activeNameEl) activeNameEl.textContent = sel.name;
+        if(activeDescEl) activeDescEl.textContent = (sel.persona||'').substring(0,35);
+        if(iconEl) iconEl.classList.add('has');
+      } else {
+        if(activeEl) activeEl.classList.add('empty');
+        if(activeAvEl) activeAvEl.innerHTML = '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+        if(activeNameEl) activeNameEl.textContent = '未选择面具';
+        if(activeDescEl) activeDescEl.textContent = 'AI 将不知道你是谁';
+        if(iconEl) iconEl.classList.remove('has');
+      }
+      saveContactSettings();
+      liveRefresh();
+    });
+  });
+}
+
+function showMaskActionSheet(mask){
+  var old = document.getElementById('csMaskActionSheet');
+  if(old) old.parentNode.removeChild(old);
+  var sheet = document.createElement('div');
+  sheet.id = 'csMaskActionSheet';
+  sheet.className = 'cs-mask-sheet-mask';
+  sheet.innerHTML =
+    '<div class="cs-mask-sheet">'+
+      '<div class="cs-mask-sheet-handle"></div>'+
+      '<div class="cs-mask-sheet-title">'+escSettings(mask.name)+'</div>'+
+      '<div class="cs-mask-sheet-btn edit" id="csMaskSheetEdit"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span>编辑面具</span></div>'+
+      '<div class="cs-mask-sheet-btn del" id="csMaskSheetDel"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg><span>删除面具</span></div>'+
+      '<div class="cs-mask-sheet-btn cancel" id="csMaskSheetCancel"><span>取消</span></div>'+
+    '</div>';
+  document.body.appendChild(sheet);
+  requestAnimationFrame(function(){ sheet.classList.add('show'); });
+  function closeSheet(){
+    sheet.classList.remove('show');
+    setTimeout(function(){ if(sheet.parentNode) sheet.parentNode.removeChild(sheet); }, 350);
+  }
+  sheet.addEventListener('click', function(e){ if(e.target === sheet) closeSheet(); });
+  sheet.querySelector('#csMaskSheetCancel').addEventListener('click', closeSheet);
+  sheet.querySelector('#csMaskSheetEdit').addEventListener('click', function(){
+    closeSheet();
+    setTimeout(function(){ showMaskEditModal(mask); }, 200);
+  });
+  sheet.querySelector('#csMaskSheetDel').addEventListener('click', function(){
+    closeSheet();
+    var masks = getUserMasks();
+    var newMasks = masks.filter(function(m){return m.id !== mask.id;});
+    saveUserMasks(newMasks);
+    var contacts = [];
+    try{ contacts = JSON.parse(localStorage.getItem('wp_chat_contacts')||'[]'); }catch(ex){}
+    var c = contacts.find(function(x){return x.id === currentContactId;});
+    if(c && c.settings && c.settings.userMaskId === mask.id){
+      c.settings.userMaskId = '';
+      localStorage.setItem('wp_chat_contacts', JSON.stringify(contacts));
+    }
+    renderMaskList(currentContactId, c ? c.settings : {});
+  });
+}
+
+function showMaskEditModal(mask){
+  var isNew = !mask;
+  if(isNew) mask = { id: 'mask_'+Date.now(), name: '', persona: '', avatar: '' };
+  var old = document.getElementById('csMaskEditModal');
+  if(old) old.parentNode.removeChild(old);
+  var avatarKey = mask.avatar || '';
+  var modal = document.createElement('div');
+  modal.id = 'csMaskEditModal';
+  modal.className = 'cs-mem-modal-mask';
+  modal.innerHTML =
+    '<div class="cs-mem-modal" style="max-width:320px;">'+
+      '<div class="cs-mem-modal-title">'+(isNew?'新建面具':'编辑面具')+'</div>'+
+      '<div class="cs-mask-avatar-upload" id="csMaskAvatarArea">'+
+        '<div class="cs-mask-avatar-ring" id="csMaskAvatarRing">'+
+          '<img class="cs-mask-avatar-img" id="csMaskAvatarImg" src="" style="display:none;">'+
+          '<div class="cs-mask-avatar-placeholder" id="csMaskAvatarPh">'+
+            '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'+
+          '</div>'+
+        '</div>'+
+        '<div class="cs-mask-avatar-badge"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>'+
+      '</div>'+
+      '<div class="cs-field" style="margin-bottom:12px;">'+
+        '<div class="cs-field-label">面具名称</div>'+
+        '<input class="cs-field-input" id="csMaskEditName" value="'+escSettings(mask.name)+'" placeholder="例如：小明、旅行者...">'+
+      '</div>'+
+      '<div class="cs-field">'+
+        '<div class="cs-field-label">用户人设</div>'+
+        '<textarea class="cs-field-textarea" id="csMaskEditPersona" style="min-height:120px;" placeholder="描述你扮演的角色设定、性格、背景等...">'+escSettings(mask.persona||'')+'</textarea>'+
+      '</div>'+
+      '<div class="cs-mem-modal-btns">'+
+        '<button class="cd-edit-confirm-btn cancel" id="csMaskEditCancel">取消</button>'+
+        '<button class="cd-edit-confirm-btn confirm" id="csMaskEditSave">保存</button>'+
+      '</div>'+
+    '</div>';
+  document.body.appendChild(modal);
+  requestAnimationFrame(function(){ modal.classList.add('show'); });
+
+  /* 加载已有头像 */
+  var imgEl = modal.querySelector('#csMaskAvatarImg');
+  var phEl = modal.querySelector('#csMaskAvatarPh');
+  var pendingAvatarData = null;
+  if(avatarKey){
+    if(avatarKey.startsWith('data:')){
+      imgEl.src = avatarKey; imgEl.style.display = ''; phEl.style.display = 'none';
+      pendingAvatarData = avatarKey;
+    } else if(avatarKey.startsWith('mask_avatar_') && window.WhisperDB){
+      WhisperDB.get(avatarKey).then(function(data){
+        if(data){ imgEl.src = data; imgEl.style.display = ''; phEl.style.display = 'none'; pendingAvatarData = data; }
+      });
+    }
+  }
+
+  /* 点击上传头像 */
+  modal.querySelector('#csMaskAvatarArea').addEventListener('click', function(){
+    var inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/*';
+    inp.addEventListener('change', function(){
+      var f = inp.files && inp.files[0]; if(!f) return;
+      var reader = new FileReader();
+      reader.onload = function(){
+        pendingAvatarData = reader.result;
+        imgEl.src = pendingAvatarData;
+        imgEl.style.display = '';
+        phEl.style.display = 'none';
+      };
+      reader.readAsDataURL(f);
+    });
+    inp.click();
+  });
+
+  function closeModal(){
+    modal.classList.remove('show');
+    setTimeout(function(){ if(modal.parentNode) modal.parentNode.removeChild(modal); }, 300);
+  }
+  modal.querySelector('#csMaskEditCancel').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+  modal.querySelector('#csMaskEditSave').addEventListener('click', function(){
+    var name = modal.querySelector('#csMaskEditName').value.trim();
+    var persona = modal.querySelector('#csMaskEditPersona').value.trim();
+    if(!name) return;
+
+    function doSave(avatarRef){
+      var masks = getUserMasks();
+      var existing = masks.find(function(m){return m.id === mask.id;});
+      if(existing){ existing.name = name; existing.persona = persona; existing.avatar = avatarRef || existing.avatar || ''; }
+      else { masks.push({ id: mask.id, name: name, persona: persona, avatar: avatarRef || '' }); }
+      saveUserMasks(masks);
+      closeModal();
+      var contacts = [];
+      try{ contacts = JSON.parse(localStorage.getItem('wp_chat_contacts')||'[]'); }catch(ex){}
+      var c = contacts.find(function(x){return x.id === currentContactId;});
+      renderMaskList(currentContactId, c ? c.settings : {});
+    }
+
+    if(pendingAvatarData && window.WhisperDB){
+      var key = 'mask_avatar_' + mask.id;
+      WhisperDB.set(key, pendingAvatarData).then(function(){
+        doSave(key);
+      });
+    } else {
+      doSave(mask.avatar || '');
+    }
+  });
 }
 
 window.openChatSettings = open;
 window.closeChatSettings = close;
+window.openMemoryLibrary = function(contactId){
+  if(contactId) currentContactId = contactId;
+  openMemoryLibrary();
+};
 
 })();
